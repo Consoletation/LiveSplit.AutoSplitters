@@ -10,13 +10,13 @@ startup {
 }
 
 reset {
-    if (current.timer < 0.01) {
+    if (current.timer < old.timer) {
         return true;
     }
 }
 
 start {
-    if (current.timer > 0.01) {
+    if (current.timer > 0) {
         return true;
     }
 }
