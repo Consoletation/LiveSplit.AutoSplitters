@@ -4,8 +4,8 @@ state("simmiland" , "20210720") {
     double prayer : 0x0043550C, 0x0,  0x60, 0x10, 0xBD4, 0x0, 0xA0;
 }
 
-startup {
-    print("[simmiland asl] startup");
+init {
+    print("[simmiland asl] init");
     refreshRate = 60;
 }
 
@@ -18,6 +18,18 @@ reset {
 start {
     if (current.timer > 0) {
         return true;
+    }
+}
+
+split {
+    if (current.iq > old.iq) {
+        if (
+            old.iq <  71 &&  71 <= current.iq // Farmhouse
+         || old.iq < 101 && 101 <= current.iq // Town Center
+         || old.iq < 141 && 141 <= current.iq // Sky Tower
+        ) {
+            return true;
+        }
     }
 }
 
